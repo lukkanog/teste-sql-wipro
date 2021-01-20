@@ -39,19 +39,26 @@ GO
 
 
 INSERT INTO tb_Processo (nroProcesso, Autor, idStatus, DtEntrada, DtEncerramento)
-	VALUES	(1, 'Autor 1',1, '2010-03-05', '2013-02-01' ),
-			(2, 'Autor 2',2, '2015-06-20', '2017-02-01' )
+	VALUES	(012345678999, 'Autor 1',1, '2010-03-05', '2013-02-01' ),
+			(012345678999, 'Autor 2',2, '2015-06-20', '2017-02-01' ),
+			(012345678999, 'Autor 3',2, '2016-01-20', '2016-02-01' ),
+			(012345678999, 'Autor 4',1, '2014-03-05', '2019-06-20' ),
+			(012345678999, 'Autor 5',2, '2013-03-05', '2013-12-31' )
 GO
 
 INSERT INTO tb_Processo (nroProcesso, Autor, DtEntrada, DtEncerramento)
-	VALUES	(3, 'Autor sem status', '2010-09-05', '2013-12-01')
+	VALUES	(012345678999, 'Autor sem status', '2010-09-05', '2013-12-01')
 GO
 
-SELECT * FROM tb_Andamento
+SELECT * FROM tb_Processo
 
 INSERT INTO tb_Andamento (idProcesso, dtAndamento, dsMovimento)
 	VALUES	(1, '2015-12-01', 'dsMovimento 1'),
-			(2, '2013-12-01', 'dsMovimento 2')
+			(2, '2013-12-01', 'dsMovimento 2'),
+			(3, '2020-12-01', 'dsMovimento 2'),
+			(4, '2021-01-02', 'dsMovimento 2'),
+			(5, '2014-12-01', 'dsMovimento 2'),
+			(6, '2020-11-11', 'dsMovimento 2')
 GO
 
 
@@ -73,3 +80,8 @@ WHERE YEAR(P.DtEncerramento) = 2013
 -- Comando 3:
 
 
+
+-- Comando 4:
+SELECT RIGHT('000000000000' + CAST(idProcesso as VARCHAR(12)), 12) 
+AS 'Números de identificação dos processos'
+FROM tb_Processo
