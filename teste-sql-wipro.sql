@@ -15,7 +15,7 @@ GO
 
 CREATE TABLE tb_Processo(
 	idProcesso INT PRIMARY KEY IDENTITY NOT NULL,
-	nroProcesso BIGINT NOT NULL,
+	nroProcesso BIGINT NOT NULL ,
 	Autor VARCHAR(90) ,
 	DtEntrada DATE,
 	DtEncerramento DATE,
@@ -39,15 +39,15 @@ GO
 
 
 INSERT INTO tb_Processo (nroProcesso, Autor, idStatus, DtEntrada, DtEncerramento)
-	VALUES	(012345678999, 'Autor 1',1, '2010-03-05', '2013-02-01' ),
-			(012345678999, 'Autor 2',2, '2015-06-20', '2017-02-01' ),
-			(012345678999, 'Autor 3',2, '2016-01-20', '2016-02-01' ),
-			(012345678999, 'Autor 4',1, '2014-03-05', '2019-06-20' ),
-			(012345678999, 'Autor 5',2, '2013-03-05', '2013-12-31' )
+	VALUES	(1, 'Autor 1',1, '2010-03-05', '2013-02-01' ),
+			(2, 'Autor 2',2, '2015-06-20', '2017-02-01' ),
+			(4444, 'Autor 3',2, '2016-01-20', '2016-02-01' ),
+			(50026, 'Autor 4',1, '2014-03-05', '2019-06-20' ),
+			(72356845, 'Autor 5',2, '2013-03-05', '2013-12-31' )
 GO
 
 INSERT INTO tb_Processo (nroProcesso, Autor, DtEntrada, DtEncerramento)
-	VALUES	(012345678999, 'Autor sem status', '2010-09-05', '2013-12-01')
+	VALUES	(77, 'Autor sem status', '2010-09-05', '2013-12-01')
 GO
 
 SELECT * FROM tb_Processo
@@ -62,6 +62,7 @@ INSERT INTO tb_Andamento (idProcesso, dtAndamento, dsMovimento)
 GO
 
 
+-- QUESTÕES:
 
 -- Comando 1:
 SELECT P.*, S.dsStatus 
@@ -71,17 +72,21 @@ ON P.idStatus = S.idStatus
 
 -- Comando 2:
 SELECT MAX(A.dtANdamento)
-AS 'Maior data de andamento com processos encerrados em 2013'
+--AS 'Maior data de andamento com processos encerrados em 2013'
 FROM tb_Andamento A
 INNER JOIN tb_Processo P
 ON P.idProcesso = A.idProcesso
 WHERE YEAR(P.DtEncerramento) = 2013
 
 -- Comando 3:
-
+SELECT DtEncerramento
+FROM tb_Processo
+GROUP BY DtEncerramento
+HAVING COUNT(DtEncerramento) > 5
 
 
 -- Comando 4:
-SELECT RIGHT('000000000000' + CAST(idProcesso as VARCHAR(12)), 12) 
-AS 'Números de identificação dos processos'
+SELECT RIGHT('000000000000' + CAST(nroProcesso as VARCHAR(12)), 12) 
+--AS 'Números de identificação dos processos'
 FROM tb_Processo
+
