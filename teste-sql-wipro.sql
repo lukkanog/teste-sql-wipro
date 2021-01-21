@@ -79,7 +79,7 @@ ON P.idProcesso = A.idProcesso
 WHERE YEAR(P.DtEncerramento) = 2013
 
 -- Comando 3:
-SELECT DtEncerramento
+SELECT DtEncerramento, Count(DtEncerramento) as 'Quantidade'
 FROM tb_Processo
 GROUP BY DtEncerramento
 HAVING COUNT(DtEncerramento) > 5
