@@ -79,7 +79,7 @@ ON P.idProcesso = A.idProcesso
 WHERE YEAR(P.DtEncerramento) = 2013
 
 -- Comando 3:
-SELECT DtEncerramento, Count(DtEncerramento) as 'Quantidade'
+SELECT DtEncerramento, COUNT(DtEncerramento) as 'Quantidade'
 FROM tb_Processo
 GROUP BY DtEncerramento
 HAVING COUNT(DtEncerramento) > 5
@@ -89,4 +89,3 @@ HAVING COUNT(DtEncerramento) > 5
 SELECT RIGHT('000000000000' + CAST(nroProcesso as VARCHAR(12)), 12) 
 AS 'Números de identificação dos processos'	
 FROM tb_Processo
-
